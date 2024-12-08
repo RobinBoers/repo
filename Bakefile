@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+SRC=src
+REMOTE=s11
+DOMAIN=cydia.geheimesite.nl
+
+deploy() {
+  $DEPLOY . $REMOTE:domains/$DOMAIN/public_html/repo/
+}
+
+serve() {
+  waiter --dev
+}
