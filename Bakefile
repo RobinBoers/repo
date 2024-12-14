@@ -8,6 +8,18 @@ deploy() {
   $DEPLOY . $REMOTE:domains/$DOMAIN/public_html/repo/
 }
 
+build() {
+  dpkg-scanpackages -m debs > Packages
+  sed -i '' 's/Package: org.thebigboss/Package: org.dupunkto/g' Packages
+  sed -i '' 's/BigBoss <bigboss@thebigboss.org>/Robijntje <axcelott@roblog.nl>/g' Packages
+  sed -i '' -E '/^(Homepage|Depiction|Sponsor|Tag)/d' Packages
+
+  rm Packages.bz2
+  rm Packages.gz
+  bzip2 -k Packages
+  gzip -k Packages
+}
+
 serve() {
   waiter --dev
 }
